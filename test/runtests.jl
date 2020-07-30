@@ -1,5 +1,7 @@
 using Shot
 using Test
+include ("Fluid.jl")
+include ("UnitConversions.jl")
 
 
 f = Fluid(50.0,0.7796,650.0)
