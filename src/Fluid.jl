@@ -92,3 +92,17 @@ function gasDensity(fluid::Fluid, pressure::Float64, temperature::Float64)
         temp = fahrenhetToRankine(temperature)
         return (pressure*ma)/(10.73*temp)
 end
+
+"""
+    mixtureDensity(oilDensity, waterDensity, waterFraction)
+"""
+function mixtureDensity(oilDensity::Float64, waterDensity::Float64, waterFraction::Float64)
+    return oilDensity*(1-waterFraction)+waterDensity*waterFraction
+end
+
+"""
+    mixtureBulkModulus(oilDensity, waterDensity, waterFraction)
+"""
+function mixtureBulkModulus(oilBulkModulus::Float64, waterBulkModulus::Float64, waterFraction::Float64)
+    return oilBulkModulus*(1-waterFraction)+waterBulkModulus*waterFraction
+end

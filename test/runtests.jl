@@ -1,5 +1,6 @@
 include("../src/UnitConversions.jl")
 include("../src/Fluid.jl")
+include("../src/Tubing.jl")
 
 using Shot
 using Test
@@ -7,7 +8,6 @@ using Test
 
 f = Fluid(50.0,0.65,650.0)
 f2 = Fluid(35.0, 0.77, 650.0)
-
 
 
 
@@ -22,5 +22,7 @@ f2 = Fluid(35.0, 0.77, 650.0)
     @test pressureGradient(62.4) == 0.43333333333333335
     @test adiabaticWaterBulkModulus(150.0, 1000.0) == 351400.00
     @test gasDensity(f, 1500.0, 150.0) == 4.3139351901364344
-
+    @test psiFactor(0.1,0.01,0.3,1) == 1.1236363636363635
+    @test psiFactor(0.1,0.01,0.3,2) == 1.069090909090909
+    @test psiFactor(0.1,0.01,0.3,3) == 1.1236363636363635
 end
