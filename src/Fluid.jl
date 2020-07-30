@@ -54,3 +54,10 @@ function adiabaticOilModulus(fluid::Fluid, temperature, pressure)
     temp = fahrenhetToRankine(temperature)
     ka = a+b*pressure-c*(temp^0.5)-d*(fluid.gravityAPI)-e*(fluid.gravityAPI^2)+f*temp*(fluid.gravityAPI)
 end
+
+"""
+    pressureGradient(density::Float64)
+
+Compute the pressure gradient given a density in lb/cuft
+"""
+pressureGradient(density::Float64) = density/144.0
