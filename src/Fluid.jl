@@ -1,3 +1,5 @@
+
+using Interpolations
 include("UnitConversions.jl")
 
 
@@ -49,7 +51,7 @@ Compute the adiabatic oil modulus in psi using the Arco formula.
 Temperature must be given in Fahrenheit.
 Pressure must be given in psia
 """
-function adiabaticOilModulus(fluid::Fluid, temperature, pressure)
+function adiabaticOilBulkModulus(fluid::Fluid, temperature, pressure)
     a,b,c,d,e,f = 1.286e6, 13.55, 4.122e4, 4.53e3, 10.59, 3.228
     temp = fahrenhetToRankine(temperature)
     ka = a+b*pressure-c*(temp^0.5)-d*(fluid.gravityAPI)-e*(fluid.gravityAPI^2)+f*temp*(fluid.gravityAPI)
@@ -61,3 +63,32 @@ end
 Compute the pressure gradient given a density in lb/cuft
 """
 pressureGradient(density::Float64) = density/144.0
+
+"""
+    adiabaticWaterBulkModulus(temperature::Float, pressure::Float)
+
+Calculates the adiabatic bulk modulus for water.
+Temperature must be in Fahrenheit
+Pressure must be in psia.
+"""
+function adiabaticWaterBulkModulus(temperature::Float64, pressure::Float64)
+    tempArray = [32, 50, 68, 86, 104, 122, 140, 158, 176, 194, 212]
+    kosArray = [289, 308, 323, 333, 340, 345, 348, 348, 341, 342, 336]
+    ipt = LinearInterpolation(tempArray, kosArray)
+    ko = ipt(temperature)
+    return 1000*ko+3.4*pressure
+end
+
+
+"""
+    gasDensity(fluid::Fluid, pressure::Float64, temperature::Float64)
+
+Calculates gas density in lb/cuft.
+pressure must be in psia
+temperature must be in Fahrenheit
+"""
+function gasDensity(fluid::Fluid, pressure::Float64, temperature::Float64)
+        ma = 28.96*fluid.gasGravity
+        temp = fahrenhetToRankine(temperature)
+        return (pressure*ma)/(10.73*temp)
+end
