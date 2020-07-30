@@ -6,8 +6,6 @@ include("UnitConversions.jl")
 
 f = Fluid(50.0,0.7796,650.0)
 f2 = Fluid(35.0, 0.77, 650.0)
-oilDensity(f,180)
-adiabaticOilModulus(f2,80.0, 1000.0 )
 
 oilGravity(f)
 @testset "Shot.jl" begin
@@ -18,5 +16,6 @@ oilGravity(f)
     @test rankineToFahrenheit(520) == 60
     @test oilDensity(f,180)== 39.87351190240599
     @test adiabaticOilModulus(f2, 80.0,1000.0 )==231170.2088159817
+    @test pressureGradient(62.4) == 0.433333
 
 end
