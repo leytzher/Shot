@@ -1,6 +1,7 @@
 include("../src/UnitConversions.jl")
 include("../src/Fluid.jl")
 include("../src/Tubing.jl")
+include("../src/Trajectory.jl")
 
 using Shot
 using Test
@@ -25,4 +26,5 @@ f2 = Fluid(35.0, 0.77, 650.0)
     @test psiFactor(0.1,0.01,0.3,1) == 1.1236363636363635
     @test psiFactor(0.1,0.01,0.3,2) == 1.069090909090909
     @test psiFactor(0.1,0.01,0.3,3) == 1.1690909090909092
+    @test getTVDSS(10.0,[1.0, 5.0, 8.0, 15.0],[0., 1., 2., 3.])==2.2857142857142856
 end
