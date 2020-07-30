@@ -3,6 +3,9 @@ uuid = "f16cb476-2844-4d12-b034-43fe284cab7e"
 authors = ["Leytzher Muro"]
 version = "0.1.0"
 
+[deps]
+Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
+
 [compat]
 julia = "1"
 
@@ -11,6 +14,3 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
 test = ["Test"]
-
-[deps]
-Interpolations = "a98d9a8b-a2ab-59e6-89dd-64a1c18fca59"
